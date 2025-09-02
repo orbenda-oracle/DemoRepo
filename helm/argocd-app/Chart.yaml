@@ -1,0 +1,11 @@
+apiVersion: v2
+name: argocd-app
+description: Helm chart to create an Argo CD AppProject and Application
+type: application
+version: 0.1.0
+appVersion: "2.11.0"
+kubeVersion: ">=1.20.0-0"
+home: https://argo-cd.readthedocs.io/
+sources:
+  - https://github.com/argoproj/argo-cd
+

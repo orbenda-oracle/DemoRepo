@@ -1,0 +1,20 @@
+{{- if .Values.project.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Values.project.name }}
+  namespace: {{ .Values.project.namespace }}
+spec:
+  description: {{ .Values.project.description | quote }}
+  sourceRepos:
+    {{- toYaml .Values.project.sourceRepos | nindent 4 }}
+  destinations:
+    {{- toYaml .Values.project.destinations | nindent 4 }}
+  clusterResourceWhitelist:
+    {{- toYaml .Values.project.clusterResourceWhitelist | nindent 4 }}
+  namespaceResourceWhitelist:
+    {{- toYaml .Values.project.namespaceResourceWhitelist | nindent 4 }}
+  orphanedResources:
+    warn: {{ .Values.project.orphanedResources.warn }}
+{{- end }}
+

@@ -1,0 +1,41 @@
+project:
+  enabled: true
+  name: demo-project
+  namespace: argocd
+  description: Demo Argo CD project
+  sourceRepos:
+    - '*'
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  orphanedResources:
+    warn: true
+
+application:
+  enabled: true
+  name: demo-app
+  namespace: argocd
+  project: demo-project
+  source:
+    repoURL: https://github.com/example/demo-repo.git
+    targetRevision: main
+    path: helm/nginx
+    helm:
+      valueFiles: []
+      parameters: []
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
